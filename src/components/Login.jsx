@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BG_IMAGE, PROFILE } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,20 +25,25 @@ const Login = () => {
     
     if(!isSignInForm) {
       // Sign Up Logic
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      createUserWithEmailAndPassword(
+        auth, 
+        email.current.value, 
+        password.current.value
+      )
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value, 
-            photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpD9ASYWYgnHfPMmq12fWII25ZGf5K2pRIjw&s"
+            photoURL: PROFILE
           }).then(() => {
-            const { uid, email, displayName, photoURL } = auth.currentUser;
+            const refreshedUser = auth.currentUser;
+            const { uid, email, displayName, photoURL } = refreshedUser;
             dispatch(
               addUser({
-                uid: uid,
-                email: email,
-                displayName: displayName,
-                photoURL: photoURL,
+                uid,
+                email,
+                displayName,
+                photoURL,
               })
             );
           }).catch((error) => {
@@ -53,7 +59,7 @@ const Login = () => {
       // Sign In Logic
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
-          // const user = userCredential.user;
+          const user = userCredential.user;
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -78,9 +84,9 @@ const Login = () => {
       <Header />
       <div>
         <img
-          className="absolute"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/4690cab8-243a-4552-baef-1fb415632f74/web/IN-en-20241118-TRIFECTA-perspective_0b813abc-8365-4a43-a9d8-14c06e84c9f3_small.jpg"
-          alt="logo"
+          className="absolute h-full w-screen"
+          src={BG_IMAGE}
+          alt="bg-image"
         />
       </div>
       <form
