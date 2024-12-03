@@ -11,7 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  
+
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -26,8 +26,8 @@ const Login = () => {
     if(!isSignInForm) {
       // Sign Up Logic
       createUserWithEmailAndPassword(
-        auth, 
-        email.current.value, 
+        auth,
+        email.current.value,
         password.current.value
       )
         .then((userCredential) => {
@@ -66,7 +66,7 @@ const Login = () => {
           const errorMessage = error.message;
           setErrorMessage(errorCode+"-"+errorMessage);
         });
-    }
+    };
 
     // email.current.value = "";
     // password.current.value = "";
@@ -84,14 +84,13 @@ const Login = () => {
       <Header />
       <div>
         <img
-          className="absolute h-full w-screen"
+          className="fixed h-screen w-screen"
           src={BG_IMAGE}
           alt="bg-image"
         />
       </div>
       <form
-        className=" w-1/4 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80"
-        
+        className="h-4/4 w-1/4 absolute p-8 bg-black my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-70"
       > 
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
