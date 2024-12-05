@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "netmirrorgpt.firebasestorage.app",
   messagingSenderId: "813242057047",
   appId: "1:813242057047:web:2ffe522b02504e5ae23e12",
-  measurementId: "G-RPD2S6C5NM"
+  measurementId: "G-RPD2S6C5NM",
 };
 
 // Initialize Firebase
